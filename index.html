@@ -3,16 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video to MP3 Converter</title>
+    <title>Video to Audio Converter</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Video to MP3 Converter</h1>
-    
-    <form action="convert.php" method="post" enctype="multipart/form-data">
-        <label for="videoFile">Pilih File Video:</label>
-        <input type="file" name="videoFile" accept="video/*" required>
-        <br>
-        <input type="submit" value="Convert to MP3">
-    </form>
+    <div class="container">
+        <h1>Video to Audio Converter</h1>
+
+        <form action="convertmp3.php" method="post" enctype="multipart/form-data">
+            <label for="videoFile">Choose Video File:</label>
+            <input type="file" name="videoFile" accept="video/*" required>
+            <br>
+            <input type="submit" value="Convert to MP3">
+        </form>
+
+        <form action="convertogg.php" method="post" enctype="multipart/form-data">
+            <label for="videoFile">Choose Video File:</label>
+            <input type="file" name="videoFile" accept="video/*" required>
+            <br>
+            <input type="submit" value="Convert to OGG">
+        </form>
+
+        <form action="convertwav.php" method="post" enctype="multipart/form-data">
+            <label for="videoFile">Choose Video File:</label>
+            <input type="file" name="videoFile" accept="video/*" required>
+            <br>
+            <input type="submit" value="Convert to WAV">
+        </form>
+    </div>
 </body>
 </html>
