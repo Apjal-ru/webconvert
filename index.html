@@ -10,25 +10,18 @@
     <div class="container">
         <h1>Video to Audio Converter</h1>
 
-        <form action="convertmp3.php" method="post" enctype="multipart/form-data">
+        <form action="convert.php" method="post" enctype="multipart/form-data">
             <label for="videoFile">Choose Video File:</label>
             <input type="file" name="videoFile" accept="video/*" required>
             <br>
-            <input type="submit" value="Convert to MP3">
-        </form>
-
-        <form action="convertogg.php" method="post" enctype="multipart/form-data">
-            <label for="videoFile">Choose Video File:</label>
-            <input type="file" name="videoFile" accept="video/*" required>
+            <label for="audioFormat">Select Audio Format:</label>
+            <select name="audioFormat">
+                <option value="mp3">MP3</option>
+                <option value="ogg">OGG</option>
+                <option value="wav">WAV</option>
+            </select>
             <br>
-            <input type="submit" value="Convert to OGG">
-        </form>
-
-        <form action="convertwav.php" method="post" enctype="multipart/form-data">
-            <label for="videoFile">Choose Video File:</label>
-            <input type="file" name="videoFile" accept="video/*" required>
-            <br>
-            <input type="submit" value="Convert to WAV">
+            <input type="submit" value="Convert">
         </form>
     </div>
 </body>

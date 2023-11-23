@@ -28,7 +28,8 @@ label {
     margin-bottom: 8px;
 }
 
-input[type="file"] {
+input[type="file"],
+select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
