@@ -7,15 +7,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["videoFile"])) {
 
     switch ($outputFormat) {
         case 'mp3':
-            $outputFile = 'output' . $outputFormat;
-            break;
-
         case 'ogg':
-            $outputFile = 'output' . $outputFormat;
-            break;
-
         case 'wav':
-            $outputFile = 'output' . $outputFormat;
+            $outputFile = 'hasil.' . $outputFormat;
             break;
 
         default:
@@ -24,9 +18,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["videoFile"])) {
     }
 
     if (convertVideoToFormat($inputVideo, $outputFile, $outputFormat)) {
-        echo "Conversion to $outputFormat successful!";
+        http_response_code(200); // OK
     } else {
-        echo "Conversion to $outputFormat failed.";
+        http_response_code(500); // Internal Server Error
     }
 }
 ?>

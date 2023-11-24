@@ -49,3 +49,36 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #2980b9;
 }
+
+#progressContainer {
+    margin-top: 20px;
+    display: none;
+}
+
+#progressLabel {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#conversionProgress {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#downloadButton {
+    display: block;
+    background-color: #2ecc71;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#downloadButton:hover {
+    background-color: #27ae60;
+}
+
