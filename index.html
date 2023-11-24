@@ -35,30 +35,35 @@
         function convertVideo() {
             var form = document.getElementById('convertForm');
             var formData = new FormData(form);
-
+    
             var xhr = new XMLHttpRequest();
             xhr.open('POST', form.action, true);
-
+    
             xhr.upload.onprogress = function (e) {
                 if (e.lengthComputable) {
                     var percentComplete = (e.loaded / e.total) * 100;
                     document.getElementById('conversionProgress').value = percentComplete;
                 }
             };
-
+    
             xhr.onload = function () {
                 if (xhr.status === 200) {
                     document.getElementById('progressContainer').style.display = 'block';
                     document.getElementById('progressLabel').innerText = 'Conversion Complete';
                     document.getElementById('downloadButton').style.display = 'block';
-                    document.getElementById('downloadButton').href = 'download.php?format=' + formData.get('audioFormat');
+    
+                    // Menghasilkan tautan download dengan menambahkan attribute "download"
+                    var downloadLink = document.getElementById('downloadButton');
+                    downloadLink.href = 'download.php?format=' + formData.get('audioFormat');
+                    downloadLink.setAttribute('download', 'hasil.' + formData.get('audioFormat'));
+    
                 } else {
                     alert('Error during conversion. Please try again.');
                 }
             };
-
+    
             xhr.send(formData);
         }
     </script>
-</body>
+    </body>
 </html>
