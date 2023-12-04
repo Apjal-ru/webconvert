@@ -14,10 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exec("ffmpeg -i /var/www/html/webconvert/uploads/video.mp4 -q:a 0 -map a $audioFile 2>&1", $output, $returnCode);
 
     // Tampilkan output dan kode status (hapus ini setelah menemukan masalahnya)
-    echo '<pre>';
-    print_r($output);
-    echo '</pre>';
-    echo '<p>Return code: ' . $returnCode . '</p>';
+    //echo '<pre>';
+    //print_r($output);
+    //echo '</pre>';
+    //echo '<p>Return code: ' . $returnCode . '</p>';
 
     // Hapus file video yang diunggah
     unlink($videoFile);
