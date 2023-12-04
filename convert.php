@@ -1,70 +1,36 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $targetDir = "./uploads/";
+    $videoFile = $targetDir . basename($_FILES['videoFile']['name']);
 
-function convertVideoToFormat($inputVideo, $outputFile, $outputFormat) {
-    $ffmpegPath = 'ffmpeg';
-    $inputVideo = escapeshellarg($inputVideo);
-    $outputFile = escapeshellarg($outputFile);
-    $outputFormat = escapeshellarg($outputFormat);
-    $outputFile .= '.' . $outputFormat;
+    // Pindahkan file video yang diunggah ke direktori sementara
+    move_uploaded_file($_FILES['videoFile']['tmp_name'], $videoFile);
 
-    // Pernyataan debug sebelum eksekusi perintah FFmpeg
-    echo "Before FFmpeg command\n";
+    // Mendapatkan nilai audioFormat dari formulir
+    $audioFormat = isset($_POST['audioFormat']) ? $_POST['audioFormat'] : 'mp3';
 
-    $command = "$ffmpegPath -i $inputVideo -q:a 0 -map a $outputFile";
-    exec($command, $output, $returnCode);
+    // Konversi ke format yang dipilih
+    $audioFile = $targetDir . pathinfo($videoFile, PATHINFO_FILENAME) . '.' . $audioFormat;
+    exec("ffmpeg -i /var/www/html/webconvert/uploads/video.mp4 -q:a 0 -map a $audioFile 2>&1", $output, $returnCode);
 
-    // Pernyataan debug setelah eksekusi perintah FFmpeg
-    echo "After FFmpeg command\n";
+    // Tampilkan output dan kode status (hapus ini setelah menemukan masalahnya)
+    echo '<pre>';
+    print_r($output);
+    echo '</pre>';
+    echo '<p>Return code: ' . $returnCode . '</p>';
 
-    if ($returnCode !== 0) {
-        // Tampilkan pesan kesalahan
-        echo implode("\n", $output);
-    }
+    // Hapus file video yang diunggah
+    unlink($videoFile);
+    unlink($audioFile);
 
-    return $returnCode === 0;
-}
-
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_FILES["videoFile"])) {
-    $inputVideo = $_FILES["videoFile"]["tmp_name"];
-    $outputFormat = isset($_POST["audioFormat"]) ? $_POST["audioFormat"] : 'mp3';
-
-    switch ($outputFormat) {
-        case 'mp3':
-        case 'ogg':
-        case 'wav':
-            $outputFile = __DIR__ . './hasil/' . $outputFormat;
-            break;
-
-        default:
-            echo "Invalid audio format.";
-            http_response_code(400);
-            exit;
-    }
-
-    // Pernyataan debug sebelum eksekusi FFmpeg
-    echo "Before FFmpeg\n";
-
-    if (convertVideoToFormat($inputVideo, $outputFile, $outputFormat)) {
-        // Set header untuk download file
-        header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="' . basename($outputFile) . '"');
-
-        // Baca file dan kirim ke output
-        readfile($outputFile);
-
-        // Hapus file setelah di-download
-        unlink($outputFile);
-
-        // Keluar setelah memberikan respons berhasil
-        http_response_code(200);
-        exit;
-    } else {
-        // Ubah HTTP response code ke 500 Internal Server Error
-        http_response_code(500);
-    }
-
-    // Pernyataan debug setelah eksekusi FFmpeg
-    echo "After FFmpeg\n";
+    // Tampilkan link untuk mengunduh file audio
+    echo '<h3>Conversion complete!</h3>';
+    echo '<p>Download your audio file:</p>';
+    echo '<ul>';
+    echo '<li><a href="' . $audioFile . '">Download ' . strtoupper($audioFormat) . '</a></li>';
+    echo '</ul>';
+} else {
+    // Jika bukan metode POST, kembalikan ke halaman utama
+    header('Location: index.html');
 }
 ?>
