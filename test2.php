@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Konversi ke format yang dipilih
     $audioFile = $targetDir . pathinfo($videoFile, PATHINFO_FILENAME) . '.' . $audioFormat;
-    execexec("ffmpeg -i /var/www/html/uploads/ -q:a 0 -map a $audioFile 2>&1", $output, $returnCode);
+    exec("ffmpeg -i /var/www/html/uploads/ -q:a 0 -map a $audioFile 2>&1", $output, $returnCode);
 
 
     // Tampilkan output dan kode status (hapus ini setelah menemukan masalahnya)

@@ -20,8 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //echo '<p>Return code: ' . $returnCode . '</p>';
 
     // Hapus file video yang diunggah
-    unlink($videoFile);
-    unlink($audioFile);
+    //unlink($videoFile);
 
     // Tampilkan link untuk mengunduh file audio
     echo '<h3>Conversion complete!</h3>';
@@ -29,6 +28,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo '<ul>';
     echo '<li><a href="' . $audioFile . '">Download ' . strtoupper($audioFormat) . '</a></li>';
     echo '</ul>';
+
+    // Hapus file audio setelah didownload
+    //unlink($audioFile);
+
 } else {
     // Jika bukan metode POST, kembalikan ke halaman utama
     header('Location: index.html');
