@@ -23,11 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //unlink($videoFile);
 
     // Tampilkan link untuk mengunduh file audio
-    echo '<h3>Conversion complete!</h3>';
-    echo '<p>Download your audio file:</p>';
-    echo '<ul>';
-    echo '<li><a href="' . $audioFile . '">Download ' . strtoupper($audioFormat) . '</a></li>';
-    echo '</ul>';
+    //echo '<h3>Conversion complete!</h3>';
+    //echo '<p>Download your audio file:</p>';
+    //echo '<ul>';
+    //echo '<li><a href="' . $audioFile . '">Download ' . strtoupper($audioFormat) . '</a></li>';
+    //echo '</ul>';
 
     // Hapus file audio setelah didownload
     //unlink($audioFile);
@@ -37,3 +37,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header('Location: index.html');
 }
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video to Audio Converter</title>
+    <link rel="stylesheet" href="web.css">
+</head>
+<body>
+    <h2>Video to Audio Converter</h2>
+    <?php
+    if (isset($audioFile)) {
+        echo '<div class="download-container">';
+        echo '<h3>Conversion complete!</h3>';
+        echo '<p>Download your audio file:</p>';
+        echo '<ul>';
+        echo '<li><a class="download-link" href="' . $audioFile . '" download>Download ' . strtoupper($audioFormat) . '</a></li>';
+        echo '</ul>';
+        echo '</div>';
+    }
+    ?>
+</body>
+</html>
+
