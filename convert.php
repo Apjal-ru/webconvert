@@ -3,15 +3,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $targetDir = "./uploads/";
     $videoFile = $targetDir . basename($_FILES['videoFile']['name']);
 
-    // Pindahkan file video yang diunggah ke direktori sementara
+    // Pindahkan file video ke direktori sementara
     move_uploaded_file($_FILES['videoFile']['tmp_name'], $videoFile);
 
-    // Mendapatkan nilai audioFormat dari formulir
+    // nilai audioFormat dari formulir
     $audioFormat = isset($_POST['audioFormat']) ? $_POST['audioFormat'] : 'mp3';
 
-    // Konversi ke format yang dipilih
+    // Konversi ke format 
     $audioFile = $targetDir . pathinfo($videoFile, PATHINFO_FILENAME) . '.' . $audioFormat;
-    exec("ffmpeg -i /var/www/html/webconvert/uploads/video.mp4 -q:a 0 -map a $audioFile 2>&1", $output, $returnCode);
+    exec("ffmpeg -i $videoFile -q:a 0 -map a $audioFile 2>&1", $output, $returnCode);
 
     // Tampilkan output dan kode status (hapus ini setelah menemukan masalahnya)
     //echo '<pre>';
