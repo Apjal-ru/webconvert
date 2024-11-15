@@ -2,7 +2,7 @@
 
 Sebuah percobaan untuk membuat website converter video ke audio dengan beberapa pilihan format yang tersedia
 
-![webconvert](https://imgur.com/ba7b3d41-eb78-4e68-9dce-fb57eb07aafb)
+![webconvert](https://imgur.com/ba7b3d41-eb78-4e68-9dce-fb57eb07aafb.png)
 
 Dikerjakan oleh
 1. Afzal Haqqi R N sebagai web programmer
