@@ -1,6 +1,6 @@
 # Website video to audio converter
 
-Sebuah percobaan untuk membuat website converter video ke audio dengan beberapa pilihan format yang tersedia
+Sebuah percobaan untuk membuat website converter video ke audio dengan beberapa pilihan format yang tersedia menggunakan PHP dan FFMPEG
 
 ![webconvert](https://i.imgur.com/GFK2LtU.png)
 
